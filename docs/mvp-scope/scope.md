@@ -205,7 +205,7 @@ No PSD templates exist. Week 1 builds `studio profile new`, a wizard that works 
 | Layout presets | IG post 4:5 1080x1350 and Reels 9:16 1080x1920 (user Q5), safe margins, wordmark position, text area |
 | Layer map, ranges, references, people | Slots by name or one-time mapping; brightness and saturation ranges; 10-20 on-brand and 5 off-brand images; consent per people image |
 
-**Profile 1: DIGITAL** (`/mnt/c/Users/DangT/Documents/GitHub/DIGITAL_WebsiteV1`, read 2026-11-20, verified):
+**Profile 1: DIGITAL** (`<local-repos>/DIGITAL_WebsiteV1`, read 2026-11-20, verified):
 
 - Palette (`DESIGN.md:95-109`), light / dark: ground `#ffffff` / `#000000`; raised `#f5f5f7` / `#161617`; ink `#1d1d1f` /
   `#f5f5f7`; ink-2 `#6e6e73` / `#a1a1a6`; hairline `#d2d2d7` / `#424245`. "The one red" `#d8412f`: a mark, never body
@@ -226,7 +226,7 @@ No PSD templates exist. Week 1 builds `studio profile new`, a wizard that works 
   (owner). Copy must not make commercial claims about DIGITAL unless the owner says so; the critic checks. LICENSE:
   none (verified).
 
-**Profile 2: Portfolio** (`/mnt/c/Users/DangT/Documents/GitHub/PortfolioWebsiteV1`): owner's own brand; wizard extracts facts (not read here); second profile for the eval and demo.
+**Profile 2: Portfolio** (`<local-repos>/PortfolioWebsiteV1`): owner's own brand; wizard extracts facts (not read here); second profile for the eval and demo.
 
 ## 7. Publishing: ends at a human-approved folder
 
@@ -319,7 +319,7 @@ Dev install: venv, deps, Deno, Herdr, bwrap, ffmpeg done (header). Remaining ste
 4. Install UXP Developer Tool on Windows and sign in to Adobe (user; verify the Developer Terms online first, B1)
 5. Load `plugin/manifest.json` in UXP Developer Tool
 6. `studio pair` (prints the code to type in the plugin panel)
-7. `studio profile new --from /mnt/c/Users/DangT/Documents/GitHub/DIGITAL_WebsiteV1`
+7. `studio profile new --from <local-repos>/DIGITAL_WebsiteV1`
 
 Customer install (Windows, week 6, only after B1 5.1 passes): signed `BrandStudio-Setup.exe`; `brand-studio.ccx`; `studio keys set anthropic`; `studio keys set openai`; `studio budget set <usd>`; `studio pair`; `studio profile new`.
 
