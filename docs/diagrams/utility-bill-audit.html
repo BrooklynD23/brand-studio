@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility Bill Audit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;   /* white-smoke */
+      --color-ink:     #2d3142;   /* jet-black */
+      --color-muted:   #4f5d75;   /* blue-slate */
+      --color-accent:  #eb6c36;   /* atomic-tangerine */
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif KR', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; }
+    /* The SVG holds its readable width (min-width == the viewBox width, so the
+       type ramp is never silently scaled down). This wrapper lets a narrow
+       screen scroll the diagram instead of the whole page. */
+    .diagram-container { width: 100%; overflow-x: auto; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+
+    svg { width: 100%; min-width: 960px; display: block; }
+    /* Paper has no scrollbar, so the local scroller would clip instead of
+       scroll. Let the diagram scale down to the sheet: smaller but whole
+       beats sharp but cut off. Must come after the svg rule above - a media
+       query adds no specificity, so a later plain rule would win. */
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Agent audit, planted errors</p>
+    <h1>Utility Bill Audit</h1>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 960 792" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="utility-bill-audit-title utility-bill-audit-desc">
+        <title id="utility-bill-audit-title">Utility Bill Audit</title>
+        <desc id="utility-bill-audit-desc">Flowchart of an agent crew that extracts a utility bill, checks it for usage anomalies and tariff mismatches in parallel, sends mismatched rate fields back through a reviewer, drafts a refund claim, and requires human approval before any claim is sent.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+
+          <!-- OPTIONAL: dot-pattern background. Uncomment the <pattern> and the second <rect> below if you want the dotted paper look. -->
+          <!--
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+          -->
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <!-- <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/> -->
+
+        <!-- Zone: coordinator-run crew (painted first) -->
+        <rect x="220" y="104" width="716" height="436" rx="8" fill="none" stroke="rgba(45,49,66,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="236" y="124" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">COORDINATOR · ROUTES EVERY STEP</text>
+
+        <!-- Arrows -->
+        <line x1="480" y1="80" x2="480" y2="118" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M452 180 V196 Q452 204 444 204 H328 Q320 204 320 212 V238" fill="none" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M508 180 V196 Q508 204 516 204 H632 Q640 204 640 212 V238" fill="none" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="640" y1="300" x2="640" y2="338" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <!-- YES: mismatch to reviewer -->
+        <line x1="720" y1="380" x2="766" y2="380" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <rect x="726" y="360" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="744" y="369" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">YES</text>
+        <!-- Reviewer loop back to extractor (dashed return) -->
+        <path d="M840 350 V158 Q840 150 832 150 H562" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <rect x="848" y="244" width="76" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="886" y="253" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">RE-EXTRACT</text>
+        <!-- NO: diamond to claims drafter -->
+        <path d="M640 420 V482 Q640 490 632 490 H562" fill="none" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <rect x="648" y="438" width="24" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="660" y="447" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">NO</text>
+        <!-- Anomaly findings to claims drafter -->
+        <path d="M320 300 V482 Q320 490 328 490 H398" fill="none" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <rect x="328" y="388" width="48" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="352" y="397" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">FLAGS</text>
+        <line x1="480" y1="520" x2="480" y2="558" stroke="#4f5d75" stroke-width="1" marker-end="url(#arrow)"/>
+        <!-- Accent: approved claim goes out -->
+        <line x1="480" y1="620" x2="480" y2="658" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+        <rect x="488" y="633" width="60" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="518" y="642" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">APPROVED</text>
+
+        <!-- Nodes -->
+        <!-- 1 Start -->
+        <rect x="380" y="40" width="200" height="40" rx="20" fill="#f5f5f5"/>
+        <rect x="380" y="40" width="200" height="40" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="480" y="64" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Bill + tariff sheet</text>
+
+        <!-- 2 Extractor -->
+        <rect x="400" y="120" width="160" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="400" y="120" width="160" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="408" y="126" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="422" y="135" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="480" y="156" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Extractor</text>
+        <text x="480" y="170" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">rate + usage fields</text>
+
+        <!-- 3 Anomaly agent -->
+        <rect x="240" y="240" width="160" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="240" y="240" width="160" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="248" y="246" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="262" y="255" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="320" y="276" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Anomaly agent</text>
+        <text x="320" y="290" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">spikes, PF penalty</text>
+
+        <!-- 4 Tariff agent -->
+        <rect x="560" y="240" width="160" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="560" y="240" width="160" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="568" y="246" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="582" y="255" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="640" y="276" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Tariff agent</text>
+        <text x="640" y="290" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">billed vs tariff rate</text>
+
+        <!-- 5 Decision -->
+        <polygon points="640,340 720,380 640,420 560,380" fill="#f5f5f5"/>
+        <polygon points="640,340 720,380 640,420 560,380" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="640" y="384" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Tariff mismatch?</text>
+
+        <!-- 6 Reviewer -->
+        <rect x="768" y="350" width="144" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="768" y="350" width="144" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="776" y="356" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="790" y="365" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="840" y="386" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Reviewer</text>
+        <text x="840" y="400" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">re-checks rate fields</text>
+
+        <!-- 7 Claims drafter -->
+        <rect x="400" y="460" width="160" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="400" y="460" width="160" height="60" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="408" y="466" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="422" y="475" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="480" y="496" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Claims drafter</text>
+        <text x="480" y="510" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">refund claim draft</text>
+
+        <!-- 8 Human approval (focal) -->
+        <rect x="400" y="560" width="160" height="60" rx="6" fill="#f5f5f5"/>
+        <rect x="400" y="560" width="160" height="60" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1.2"/>
+        <rect x="408" y="566" width="28" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.50)" stroke-width="0.8"/>
+        <text x="422" y="575" fill="#eb6c36" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">HUMAN</text>
+        <text x="480" y="596" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Human approves</text>
+        <text x="480" y="610" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">before any claim sent</text>
+
+        <!-- 9 End -->
+        <rect x="400" y="660" width="160" height="40" rx="20" fill="#f5f5f5"/>
+        <rect x="400" y="660" width="160" height="40" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="480" y="684" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Claim sent</text>
+
+        <!-- Legend -->
+        <line x1="30" y1="736" x2="930" y2="736" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="30" y="760" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+        <rect x="112" y="752" width="28" height="12" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="148" y="761" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">start / end</text>
+        <rect x="248" y="752" width="28" height="12" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="284" y="761" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">agent step</text>
+        <polygon points="396,750 406,758 396,766 386,758" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="416" y="761" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">decision</text>
+        <rect x="508" y="752" width="28" height="12" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1.2"/>
+        <text x="544" y="761" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">human gate</text>
+        <line x1="652" y1="758" x2="684" y2="758" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4"/>
+        <text x="692" y="761" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">review loop</text>
+        <rect x="800" y="752" width="28" height="12" rx="2" fill="none" stroke="rgba(45,49,66,0.25)" stroke-dasharray="4,3"/>
+        <text x="836" y="761" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">crew zone</text>
+
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

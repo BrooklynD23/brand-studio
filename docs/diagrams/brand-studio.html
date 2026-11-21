@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Studio Crew</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;   /* white-smoke */
+      --color-ink:     #2d3142;   /* jet-black */
+      --color-muted:   #4f5d75;   /* blue-slate */
+      --color-accent:  #eb6c36;   /* atomic-tangerine */
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif KR', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; }
+    /* The SVG holds its readable width (min-width == the viewBox width, so the
+       type ramp is never silently scaled down). This wrapper lets a narrow
+       screen scroll the diagram instead of the whole page. */
+    .diagram-container { width: 100%; overflow-x: auto; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+
+    svg { width: 100%; min-width: 1000px; display: block; }
+    /* Paper has no scrollbar, so the local scroller would clip instead of
+       scroll. Let the diagram scale down to the sheet: smaller but whole
+       beats sharp but cut off. Must come after the svg rule above - a media
+       query adds no specificity, so a later plain rule would win. */
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Agent handoff, brand review</p>
+    <h1>Brand Studio Crew</h1>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1000 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="brand-studio-title brand-studio-desc">
+        <title id="brand-studio-title">Brand Studio Crew</title>
+        <desc id="brand-studio-desc">Flowchart of a brief handed by the Studio Lead through file-based task handoff to an Asset Editor and Copywriter, reviewed by a Brand Critic that sends passing work to the Channel Packager and the boss inbox for approval, and failing work back to its author for at most two rounds.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+
+          <!-- OPTIONAL: dot-pattern background. Uncomment the <pattern> and the second <rect> below if you want the dotted paper look. -->
+          <!--
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+          -->
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <!-- <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/> -->
+
+        <!-- Arrows (drawn first, behind nodes) -->
+        <line x1="500" y1="88" x2="500" y2="120" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="500" y1="176" x2="500" y2="208" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <!-- Task files -> Editor / Copywriter (claim) -->
+        <path d="M466 272 V288 Q466 296 458 296 H368 Q360 296 360 304 V320" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M534 272 V288 Q534 296 542 296 H632 Q640 296 640 304 V320" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <!-- Editor / Copywriter -> Brand Critic -->
+        <path d="M360 376 V384 Q360 392 368 392 H458 Q466 392 466 400 V416" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M640 376 V384 Q640 392 632 392 H542 Q534 392 534 400 V416" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <!-- Critic -> decision -->
+        <line x1="500" y1="480" x2="500" y2="504" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <!-- PASS -> Packager -->
+        <line x1="580" y1="536" x2="680" y2="536" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <!-- FAIL -> back to author via task files (dashed return) -->
+        <path d="M420 536 H208 Q200 536 200 528 V248 Q200 240 208 240 H400" fill="none" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <!-- Packager -> Boss inbox (accent) -->
+        <line x1="760" y1="560" x2="760" y2="592" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+        <!-- Arrow labels -->
+        <rect x="508" y="186" width="64" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="540" y="195" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">WRITE TASK</text>
+
+        <rect x="610" y="518" width="40" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="630" y="527" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">PASS</text>
+
+        <rect x="108" y="388" width="84" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="150" y="397" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">FAIL ≤2 ROUNDS</text>
+
+        <rect x="256" y="222" width="88" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="300" y="231" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">BACK TO AUTHOR</text>
+
+        <rect x="768" y="570" width="72" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="804" y="579" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">FOR SIGN-OFF</text>
+
+        <!-- Brief (start oval) -->
+        <rect x="420" y="40" width="160" height="48" rx="20" fill="#f5f5f5"/>
+        <rect x="420" y="40" width="160" height="48" rx="20" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="500" y="62" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Brief</text>
+        <text x="500" y="76" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">from the boss</text>
+
+        <!-- Studio Lead -->
+        <rect x="420" y="120" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="500" y="146" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Studio Lead</text>
+        <text x="500" y="162" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">coordinator</text>
+
+        <!-- Task files (store) -->
+        <rect x="400" y="208" width="200" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="400" y="208" width="200" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+        <text x="500" y="230" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Task files</text>
+        <text x="500" y="246" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">inbox → claimed → done</text>
+        <text x="500" y="260" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">atomic os.rename</text>
+
+        <!-- Asset Editor -->
+        <rect x="260" y="320" width="200" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="360" y="346" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Asset Editor</text>
+        <text x="360" y="362" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">PillowAdapter · MockAdapter</text>
+
+        <!-- Copywriter -->
+        <rect x="540" y="320" width="200" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="640" y="346" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Copywriter</text>
+        <text x="640" y="362" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">headlines + captions</text>
+
+        <!-- Brand Critic -->
+        <rect x="400" y="416" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="500" y="438" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Brand Critic</text>
+        <text x="500" y="454" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">1 · deterministic checks</text>
+        <text x="500" y="468" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">2 · judgment, other vendor</text>
+
+        <!-- Decision -->
+        <polygon points="500,504 580,536 500,568 420,536" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="500" y="540" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">On brand?</text>
+
+        <!-- Channel Packager -->
+        <rect x="680" y="512" width="160" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="760" y="532" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Channel Packager</text>
+        <text x="760" y="547" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">writes folders only</text>
+
+        <!-- Boss inbox (focal end) -->
+        <rect x="680" y="592" width="160" height="56" rx="20" fill="#f5f5f5"/>
+        <rect x="680" y="592" width="160" height="56" rx="20" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+        <text x="760" y="616" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Boss inbox</text>
+        <text x="760" y="632" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">approves · no publish</text>
+
+        <!-- Legend -->
+        <line x1="40" y1="672" x2="960" y2="672" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="688" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+
+        <rect x="40" y="704" width="24" height="12" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="72" y="714" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Start / end</text>
+
+        <rect x="184" y="704" width="24" height="12" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="216" y="714" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Agent step</text>
+
+        <rect x="328" y="704" width="24" height="12" rx="2" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+        <text x="360" y="714" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Folder store</text>
+
+        <polygon points="480,710 492,704 504,710 492,716" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="516" y="714" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Review decision</text>
+
+        <line x1="640" y1="710" x2="668" y2="710" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <text x="676" y="714" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Rework loop</text>
+
+        <line x1="792" y1="710" x2="820" y2="710" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <text x="828" y="714" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Boss approval</text>
+
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

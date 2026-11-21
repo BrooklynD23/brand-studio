@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAST Alert Triage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-accent:  #eb6c36;
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+    svg { width: 100%; min-width: 960px; display: block; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Agent triage, code security</p>
+    <h1>SAST Alert Triage</h1>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sast-triage-title sast-triage-desc">
+        <title id="sast-triage-title">SAST Alert Triage</title>
+        <desc id="sast-triage-desc">Flowchart of an agent crew triaging a Semgrep or CodeQL alert through evidence collection, false-positive audit and report writing, with a validator that sends back reports lacking source-to-sink evidence and a human analyst whose dismissals feed back to the auditor.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ARROWS (drawn before nodes) -->
+        <g fill="none" stroke="#4f5d75" stroke-width="1">
+          <!-- alert -> evidence -->
+          <line x1="228" y1="132" x2="276" y2="132" marker-end="url(#arrow)"/>
+          <!-- evidence -> auditor -->
+          <line x1="456" y1="132" x2="504" y2="132" marker-end="url(#arrow)"/>
+          <!-- auditor -> writer -->
+          <line x1="684" y1="132" x2="732" y2="132" marker-end="url(#arrow)"/>
+          <!-- writer -> validator -->
+          <line x1="822" y1="168" x2="822" y2="212" marker-end="url(#arrow)"/>
+          <!-- validator YES -> analyst -->
+          <line x1="750" y1="260" x2="684" y2="260" marker-end="url(#arrow)"/>
+          <!-- analyst -> final report -->
+          <line x1="504" y1="260" x2="456" y2="260" marker-end="url(#arrow)"/>
+          <!-- validator NO -> back to evidence collector (return loop) -->
+          <path d="M 894 260 H 928 Q 936 260 936 252 V 64 Q 936 56 928 56 H 374 Q 366 56 366 64 V 96" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+          <!-- analyst dismissals -> FP auditor (feedback) -->
+          <line x1="594" y1="224" x2="594" y2="168" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        </g>
+
+        <!-- ARROW LABELS (masked, 8px gap) -->
+        <g font-family="'Geist Mono', monospace" font-size="8" fill="#7a8399" text-anchor="middle" letter-spacing="0.06em">
+          <rect x="236" y="112" width="32" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="252" y="121">SARIF</text>
+          <rect x="464" y="112" width="32" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="480" y="121">SLICE</text>
+          <rect x="688" y="112" width="40" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="708" y="121">VERDICT</text>
+          <rect x="705" y="240" width="24" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="717" y="249">YES</text>
+          <rect x="462" y="240" width="36" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="480" y="249">SIGNED</text>
+          <rect x="616" y="36" width="64" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="648" y="45">NO · REJECT</text>
+          <rect x="602" y="190" width="56" height="12" rx="2" fill="#f5f5f5"/>
+          <text x="630" y="199">DISMISSALS</text>
+        </g>
+
+        <!-- NODES -->
+        <!-- 1. Scanner alert (start oval, external) -->
+        <rect x="48" y="108" width="180" height="48" rx="20" fill="#f5f5f5"/>
+        <rect x="48" y="108" width="180" height="48" rx="20" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="138" y="129" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Scanner alert</text>
+        <text x="138" y="145" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Semgrep / CodeQL</text>
+
+        <!-- 2. Evidence collector -->
+        <rect x="276" y="96" width="180" height="72" rx="6" fill="#f5f5f5"/>
+        <rect x="276" y="96" width="180" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="284" y="102" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="304" y="111" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="366" y="136" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Evidence collector</text>
+        <text x="366" y="152" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">source-to-sink slice</text>
+
+        <!-- 3. FP auditor -->
+        <rect x="504" y="96" width="180" height="72" rx="6" fill="#f5f5f5"/>
+        <rect x="504" y="96" width="180" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="512" y="102" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="532" y="111" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="594" y="136" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">FP auditor</text>
+        <text x="594" y="152" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">TP / FP / NEEDS_HUMAN</text>
+
+        <!-- 4. Report writer -->
+        <rect x="732" y="96" width="180" height="72" rx="6" fill="#f5f5f5"/>
+        <rect x="732" y="96" width="180" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="740" y="102" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="760" y="111" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="822" y="136" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Report writer</text>
+        <text x="822" y="152" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">file:line citations</text>
+
+        <!-- 5. Validator (decision) -->
+        <polygon points="822,212 894,260 822,308 750,260" fill="#f5f5f5"/>
+        <polygon points="822,212 894,260 822,308 750,260" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="822" y="258" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Validator</text>
+        <text x="822" y="273" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">sink cited?</text>
+
+        <!-- 6. Analyst verdict (human, focal) -->
+        <rect x="504" y="224" width="180" height="72" rx="6" fill="#f5f5f5"/>
+        <rect x="504" y="224" width="180" height="72" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+        <rect x="512" y="230" width="40" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.40)" stroke-width="0.8"/>
+        <text x="532" y="239" fill="rgba(235,108,54,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">HUMAN</text>
+        <text x="594" y="264" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Analyst verdict</text>
+        <text x="594" y="280" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">sign-off / dismiss</text>
+
+        <!-- 7. Ranked report (end oval) -->
+        <rect x="276" y="236" width="180" height="48" rx="20" fill="#f5f5f5"/>
+        <rect x="276" y="236" width="180" height="48" rx="20" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="366" y="257" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Ranked report</text>
+        <text x="366" y="273" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">approved findings</text>
+
+        <!-- Annotation callout -->
+        <text x="912" y="344" fill="#4f5d75" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">After two rejected rounds, the task escalates to the analyst.</text>
+
+        <!-- LEGEND -->
+        <line x1="30" y1="372" x2="930" y2="372" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <g font-family="'Geist Mono', monospace" font-size="8" fill="#4f5d75" letter-spacing="0.1em">
+          <text x="30" y="396" letter-spacing="0.14em">LEGEND</text>
+          <rect x="112" y="386" width="20" height="12" rx="3" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+          <text x="140" y="396">AGENT STEP</text>
+          <rect x="248" y="386" width="20" height="12" rx="3" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+          <text x="276" y="396">HUMAN</text>
+          <polygon points="384,385 393,392 384,399 375,392" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+          <text x="400" y="396">DECISION</text>
+          <rect x="496" y="386" width="20" height="12" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+          <text x="524" y="396">START / END</text>
+          <line x1="636" y1="392" x2="664" y2="392" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4"/>
+          <text x="672" y="396">FEEDBACK LOOP</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

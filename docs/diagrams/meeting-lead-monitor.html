@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Meeting Lead Monitor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;   /* white-smoke */
+      --color-ink:     #2d3142;   /* jet-black */
+      --color-muted:   #4f5d75;   /* blue-slate */
+      --color-accent:  #eb6c36;   /* atomic-tangerine */
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif KR', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; }
+    /* The SVG holds its readable width (min-width == the viewBox width, so the
+       type ramp is never silently scaled down). This wrapper lets a narrow
+       screen scroll the diagram instead of the whole page. */
+    .diagram-container { width: 100%; overflow-x: auto; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+
+    svg { width: 100%; min-width: 960px; display: block; }
+    /* Paper has no scrollbar, so the local scroller would clip instead of
+       scroll. Let the diagram scale down to the sheet: smaller but whole
+       beats sharp but cut off. Must come after the svg rule above - a media
+       query adds no specificity, so a later plain rule would win. */
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Agent review loop, verified quotes</p>
+    <h1>Public Meeting Lead Monitor</h1>
+
+    <!-- Replace meeting-lead-monitor with a unique slug for this diagram before export. -->
+    <div class="diagram-container">
+      <svg viewBox="0 0 960 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="meeting-lead-monitor-title meeting-lead-monitor-desc">
+        <title id="meeting-lead-monitor-title">Public Meeting Lead Monitor</title>
+        <desc id="meeting-lead-monitor-desc">Flowchart of agents turning public meeting agendas and minutes into a scored lead list, where a quote verifier rejects leads lacking a verbatim quote, a reviewer sends them back to the extractor once, and a reporter decides whether to make contact.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+
+          <!-- OPTIONAL: dot-pattern background. Uncomment the <pattern> and the second <rect> below if you want the dotted paper look. -->
+          <!--
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+          -->
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <!-- <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/> -->
+
+
+        <!-- Arrows first -->
+        <line x1="300" y1="88" x2="300" y2="128" stroke="#4f5d75" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        <line x1="300" y1="184" x2="300" y2="224" stroke="#4f5d75" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        <line x1="300" y1="280" x2="300" y2="316" stroke="#4f5d75" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        <line x1="380" y1="360" x2="480" y2="360" stroke="#4f5d75" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        <line x1="300" y1="404" x2="300" y2="448" stroke="#4f5d75" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        <path d="M560 332 V164 Q560 156 552 156 H380" stroke="#4f5d75" stroke-width="1.2" fill="none" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <line x1="640" y1="360" x2="720" y2="360" stroke="#4f5d75" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+        <path d="M800 388 V560 Q800 568 792 568 H380" stroke="#4f5d75" stroke-width="1.2" fill="none" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <line x1="300" y1="504" x2="300" y2="544" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <!-- Arrow labels -->
+        <rect x="418" y="340" width="24" height="12" rx="2" fill="#f5f5f5"/><text x="430.0" y="349" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+        <rect x="308" y="420" width="32" height="12" rx="2" fill="#f5f5f5"/><text x="324.0" y="429" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+        <rect x="568" y="238" width="80" height="12" rx="2" fill="#f5f5f5"/><text x="608.0" y="247" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">RETRY ONCE</text>
+        <rect x="652" y="340" width="56" height="12" rx="2" fill="#f5f5f5"/><text x="680.0" y="349" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">2ND MISS</text>
+        <rect x="808" y="466" width="80" height="12" rx="2" fill="#f5f5f5"/><text x="848.0" y="475" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">UNVERIFIED</text>
+        <!-- Nodes -->
+        <rect x="220" y="40" width="160" height="48" rx="20" fill="#f5f5f5"/><rect x="220" y="40" width="160" height="48" rx="20" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/><text x="300.0" y="68.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Agenda + minutes</text><text x="300.0" y="82.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">public PDF / video</text>
+        <rect x="220" y="128" width="160" height="56" rx="6" fill="#f5f5f5"/><rect x="220" y="128" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/><rect x="228" y="134" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/><text x="248.0" y="143" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text><text x="300.0" y="160.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Extractor</text><text x="300.0" y="174.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">flag up to 3 items</text>
+        <rect x="220" y="224" width="160" height="56" rx="6" fill="#f5f5f5"/><rect x="220" y="224" width="160" height="56" rx="6" fill="rgba(45,49,66,0.03)" stroke="#2d3142" stroke-width="1"/><rect x="228" y="230" width="34" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/><text x="245.0" y="239" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DATA</text><text x="300.0" y="256.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Lead candidate</text><text x="300.0" y="270.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">claim + quote + time</text>
+        <polygon points="300,316 380,360 300,404 220,360" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="300" y="358" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Verbatim quote?</text>
+        <text x="300" y="373" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">quote verifier</text>
+        <rect x="480" y="332" width="160" height="56" rx="6" fill="#f5f5f5"/><rect x="480" y="332" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/><rect x="488" y="338" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/><text x="508.0" y="347" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text><text x="560.0" y="364.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Reviewer</text><text x="560.0" y="378.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">returns with reason</text>
+        <rect x="720" y="332" width="160" height="56" rx="6" fill="#f5f5f5"/><rect x="720" y="332" width="160" height="56" rx="6" fill="rgba(45,49,66,0.03)" stroke="#2d3142" stroke-width="1"/><rect x="728" y="338" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/><text x="748.0" y="347" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">QUEUE</text><text x="800.0" y="364.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Human queue</text><text x="800.0" y="378.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">marked unverified</text>
+        <rect x="220" y="448" width="160" height="56" rx="6" fill="#f5f5f5"/><rect x="220" y="448" width="160" height="56" rx="6" fill="rgba(45,49,66,0.03)" stroke="#2d3142" stroke-width="1"/><rect x="228" y="454" width="34" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/><text x="245.0" y="463" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DATA</text><text x="300.0" y="480.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Scored lead list</text><text x="300.0" y="494.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">ranked, timestamped</text>
+        <rect x="220" y="544" width="160" height="48" rx="20" fill="#f5f5f5"/>
+        <rect x="220" y="544" width="160" height="48" rx="20" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+        <text x="300" y="566" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Reporter decides</text>
+        <text x="300" y="580" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">contact or drop</text>
+        <!-- Annotation -->
+        <text x="200" y="472" fill="#4f5d75" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">Weak spot: a "good lead"</text>
+        <text x="200" y="490" fill="#4f5d75" font-size="14" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">has no ground truth.</text>
+        <!-- Legend -->
+        <line x1="40" y1="624" x2="920" y2="624" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="640" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+        <rect x="40" y="652" width="24" height="12" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="72" y="662" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Agent step</text>
+        <polygon points="200,658 212,652 224,658 212,664" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="236" y="662" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Check (diamond)</text>
+        <line x1="360" y1="658" x2="388" y2="658" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <text x="396" y="662" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Return / fallback</text>
+        <line x1="520" y1="658" x2="548" y2="658" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <text x="556" y="662" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Human decision</text>
+
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
