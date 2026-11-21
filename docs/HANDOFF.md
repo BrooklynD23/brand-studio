@@ -45,7 +45,7 @@ A local companion app that makes brand-consistent marketing assets (Instagram Po
 ## Still open (blocking or pending)
 1. **Conflict 3** (posting rule): owner has not confirmed one approval click per post.
 2. **Conflict 6** (plugin stays out of public repos; grader gets a private invite): owner said "confirmed" earlier, then asked about the rec. Confirm.
-3. **B1 Adobe terms**: partly closed (own use allowed under Developer Terms 4.1(A)). Still open: the new developer tools terms at `adobe.com/go/new-developer-tools-terms` (NOT READ; this governs the plugin); the current Developer Terms version (copy read is June 2024); the worldwide PSLT (file read is the Japanese-bilingual copy; its section 10 does not exist).
+3. **B1 Adobe terms**: partly closed. Own use allowed under Developer Terms 4.1(A). The new developer tools terms (PSLT §9) = `new-developer-tools-terms-2026v1.pdf`; its §1 does not apply to PSLT 2026v2, so it adds no terms to the plugin (working reading). Still open: distribution to others (Developer Terms 5.1/5.2); §6.16 recheck against current terms; worldwide PSLT copy (file read is the Japanese-bilingual one; no section 10); owner says the 2024 Developer Terms are current (verify online at week 1).
 4. **Drawing board labels** below 11px: owner has not answered whether to enlarge and republish.
 5. **B2** credential isolation (week 3): designed, not built.
 6. **B3** UXP regression suite (week 2): planned, not built. Needs Photoshop path + UXP Developer Tool.
@@ -63,7 +63,7 @@ A local companion app that makes brand-consistent marketing assets (Instagram Po
 
 ## Next steps, in order
 1. Confirm conflicts 3 and 6 with the owner.
-2. Get the new developer tools terms (adobe.com/go/new-developer-tools-terms) from the owner.
+2. Get the worldwide PSLT copy and confirm the §9 reading with the owner (the owner says the link's files are the addendum we have).
 3. Re-sync `brand-studio/docs/` from `mvp-scope/`, commit, push (ask first).
 4. Week 1: profile wizard (B4); UXP spike once Photoshop path is confirmed; decide the drawing-board label fix.
 5. Week 2: B3 regression suite. Week 3: B2 credential isolation.
