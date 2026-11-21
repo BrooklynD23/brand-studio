@@ -1,6 +1,6 @@
 # Brand Studio: MVP scope (companion app)
 
-Date: 2026-11-21, revision 18 (PSLT §9 closed on a working reading; rev 17: private repo; rev 16: conflicts 3, 6 closed; rev 8: team).
+Date: 2026-11-21, revision 19 (worldwide PSLT read; conflict 8 opened; repo public; rev 18: §9 working reading; rev 8: team).
 Detail files: `model-routing.md` (prices, per-task routing), `b3-adapter-regression.md` (UXP regression), `legal/adobe.md` (Adobe clause record, B1). Supersedes `../proposals/brand-studio.md`.
 Read: `../brand-studio/` (3/3 tests pass), `../ambitious-plan.md` 3, 4b, 4d, `../diagrams/brand-studio.html`, `../CS4680 Assignment 5 - Your One-Person Company.md`, DIGITAL files cited in section 6.
 Installed (verified 2026-11-20): Deno 2.9.8 (`~/.deno/bin`, not on PATH), Herdr 0.9.5 (Apache 2.0), `.venv` (pillow 13.0.0,
@@ -12,24 +12,23 @@ Marks: (verified) = checked locally or on a primary page; (unverified) = not che
 ## Conflicts for the user (nothing silently picked; each shows its working reading)
 
 1. **Photoshop install: resolved.** User confirmed it launches. The two path checks disagreed; the week 1 spike records the path.
-2. **DIGITAL brand: closed.** The owner owns DIGITAL and gave full authorization (2026-11-20); recorded in the profile as
-   a consent record (section 6), scope: demo use and the MVP. No org letter needed.
-3. **Posting (later phase): closed, approved** (owner, 2026-11-21). One owner approval click per post, before any upload,
-   via the YouTube Data API and Instagram Graph API under the section 7 conditions, after B5. The MVP still ends at the
-   approved folder. Instagram needs a public media host (section 8; question 7).
-4. **Judge vendor: closed, approved pending B6** (owner, 2026-11-20). Codex is primary (WSL2, bwrap). When Codex is down
-   and the customer has a Google key, Gemini is the fallback judge; Gemini runtime use stays off until B6 passes for
-   Google. Until then, or without a Google key: Claude, logged as same-vendor.
+2. **DIGITAL brand: closed.** The owner owns DIGITAL and gave full authorization (2026-11-20); recorded in the profile as a consent record (section 6), scope: demo use and the MVP. No org letter needed.
+3. **Posting (later phase): closed, approved** (owner, 2026-11-21). One owner approval click per post, before any upload, via the YouTube Data API
+   and Instagram Graph API under the section 7 conditions, after B5. The MVP still ends at the approved folder. Instagram needs a public media host (section 8; question 4).
+4. **Judge vendor: closed, approved pending B6** (owner, 2026-11-20). Codex is primary (WSL2, bwrap). When Codex is down and the customer has a Google key,
+   Gemini is the fallback judge; Gemini runtime use stays off until B6 passes for Google. Until then, or without a Google key: Claude, logged as same-vendor.
 5. **Adobe AI/ML clause (Developer Terms 6.16): closed, option B** (owner, 2026-11-21). Adobe-touched assets (any
    Photoshop or Premiere render, any Adobe-only effect) go to human review only: no stage 2 AI judge, no previews of Adobe
    output to any vendor, at runtime or in eval. Non-Adobe assets and copy keep the full pipeline (stage 1, stage 2 per
    conflict 4, vendor previews where the consent record allows). **Hint rule** (owner, 2026-11-21): on Adobe-touched assets,
    stage 1 `critic.py` (local code, no AI) may attach its findings to the human review as hints; hints never enter the judge path (no stage 2, no model, no vendor).
-6. **A5 repo vs Developer Terms 5.1: closed, approved** (owner, 2026-11-21). `plugin/` stays out of any public repo; the
-   grader gets a private invite to BrooklynD23/brand-studio. Supported by 4.1(A) and 5.1; record in `legal/adobe.md`. Repo created 2026-11-21 (private), docs snapshot pushed; re-sync `docs/` from `mvp-scope/` on each scope change. Grader invite: pending (owner action).
-7. **Antigravity: settled, verification pending.** Excluded from every MVP runtime path, including model routing and any
-   multi-model agent (owner decision). Build-time use only by the owner directly, as their own tool, and only after its
-   terms clause 6 is read verbatim (so far a research summary: bars "using third party software, tools, or services to access the Service").
+6. **A5 repo vs Developer Terms 5.1: closed** (owner, 2026-11-21). `plugin/` is never in the repo. The repo
+   (https://github.com/BrooklynD23/brand-studio) is public since 2026-11-21 (owner decision), so the grader needs no invite. Supported by 4.1(A) and 5.1; `legal/adobe.md`.
+7. **Antigravity: settled, verification pending.** Excluded from every MVP runtime path, including model routing and any multi-model agent (owner decision).
+   Build-time use only by the owner directly, as their own tool, and only after its terms clause 6 is read verbatim (so far a research summary: bars "using third party software, tools, or services to access the Service").
+8. **Unattended runs vs worldwide PSLT §1.2: OPEN, owner decision needed.** §1.2 bars install or access "for operations not initiated by an individual
+   User (e.g., automated server processing or robotic process automation...) unless permitted in a Sales Order". Working reading: Auto mode is started from
+   the owner's session, so it is user-initiated; scheduled, unattended or batch runs that touch Adobe apps are excluded until the Sales Order permits them (question 1).
 
 ## 1. Product and first customer
 
@@ -63,7 +62,7 @@ Every harness reaches tools only through `studio-mcp` (section 4); all CLIs here
 | 5 | Antigravity | Excluded from every runtime path (routing, multi-model agents); owner's own direct tool only, after clause 6 is read verbatim (conflict 7) | - |
 
 - Build-time harnesses see the code repo only; profiles, assets and keys live outside it. `plugin/` stays out of Devin
-  cloud sessions and any public repo until B1 passes. Meta MUSE: off until its ToS and AUP are read. Not used: `CLAUDE_CODE_EXPERIMENTAL_CODE_MODE` (absent in 2.1.329).
+  cloud sessions and out of the repo until B1 passes. Meta MUSE: off until its ToS and AUP are read. Not used: `CLAUDE_CODE_EXPERIMENTAL_CODE_MODE` (absent in 2.1.329).
 
 ## 3. Agent roster: a team of 7 agents plus code
 
@@ -158,7 +157,7 @@ own calls around that. Modes (user Q1):
 | Mode | Runs without a click | Stops and asks |
 |---|---|---|
 | Default (new customers) | Edit ops on the working copy (revertible) | Everything else: vendor sends, generation, export, deletes, spend over budget |
-| Auto (like Claude Code's auto mode) | Everything except the approval-required list | The 5b approval-required list |
+| Auto (like Claude Code's auto mode), started from the owner's session (conflict 8) | Everything except the approval-required list | The 5b approval-required list; no scheduled or unattended start |
 
 1. Revertible: every edit lands on a copy; revert to step N reopens the original copy and replays the first N ops from
    `project.json`. Reverting past a `human_edit` step discards that hand edit (the log warns first).
@@ -257,7 +256,7 @@ Retention guesses accepted by the user (Q10).
 | Briefs | `.../briefs/` | Kept | Optional brief intake |
 | Review and approved packages | `.../review/`, `.../approved/` | Owner's call | Never |
 | Ledger, routing measurements, eval metrics | `.../runs/ledger.jsonl`, `.../runs/routing.json` | Kept | Optional, aggregates only |
-| Public media host (later phase, Instagram only) | Owner's choice (question 7) | Upload only after the post's approval click; random unguessable names (guess); delete as soon as publish succeeds or the 24 h container expires | Public by design: anyone with the URL can read it. Never `people=y` media unless its consent record covers public posting |
+| Public media host (later phase, Instagram only) | Owner's choice (question 4) | Upload only after the post's approval click; random unguessable names (guess); delete as soon as publish succeeds or the 24 h container expires | Public by design: anyone with the URL can read it. Never `people=y` media unless its consent record covers public posting |
 
 Secrets: the customer's keys stay on their machine. Dev: `~/.config/brand-studio/env` on the WSL ext4 home, mode 600,
 never under `/mnt/c` (drvfs shows files as 777); `studio doctor` fails otherwise. Customer Windows: Credential Manager
@@ -323,7 +322,7 @@ Dev install: venv, deps, Deno, Herdr, bwrap, ffmpeg done (header). Remaining ste
 
 Customer install (Windows, week 6, only after B1 5.1 passes): signed `BrandStudio-Setup.exe`; `brand-studio.ccx`; `studio keys set anthropic`; `studio keys set openai`; `studio budget set <usd>`; `studio pair`; `studio profile new`.
 
-CI (GitHub Actions, guess; repo BrooklynD23/brand-studio created 2026-11-21 (private), docs snapshot pushed; re-sync `docs/` from `mvp-scope/` on each scope change). Any failure blocks merge; no paid calls; mock plugin only:
+CI (GitHub Actions on public-repo minutes; repo https://github.com/BrooklynD23/brand-studio, public since 2026-11-21; `docs/` re-synced from `mvp-scope/` on each scope change with local paths scrubbed; `plugin/` never in the repo). Any failure blocks merge; no paid calls; mock plugin only:
 
 1. `ruff check .`
 2. `pytest -q tests`
@@ -378,7 +377,7 @@ Done 2026-11-20 (header list). User to install: UXP Developer Tool (Adobe login)
 
 | Week | Deliverable |
 |---|---|
-| 1 | Verify online that the 2024 Developer Terms are current (owner states they are) and read the worldwide PSLT copy, before accepting them in UXP Developer Tool (B1; §9 closed on the working reading). DIGITAL profile via the wizard (B4: wordmark, fact rules, authorization record). UXP spike in Photoshop: record the path, pair over 127.0.0.1, fill mapped slots, return a preview. `pyproject.toml`, CI 1-2 |
+| 1 | Verify online that the 2024 Developer Terms are current (owner states they are), before accepting them in UXP Developer Tool (B1). DIGITAL profile via the wizard (B4: wordmark, fact rules, authorization record). UXP spike in Photoshop: record the path, pair over 127.0.0.1, fill mapped slots, return a preview. `pyproject.toml`, CI 1-2 |
 | 2 | Deno sandbox test + `studio-mcp`; UXP regression suite skeleton for Photoshop (B3) |
 | 3 | Step log with the 17(B) recording scope, Default and Auto modes, revert by replay, takeover, local page, socket and policy tests (B2). CI 3-6 |
 | 4 | `project.json`, `critic.py` stage 1, `roles/*.md` for all 7 roles, Herdr panes; router with `test_router.py`; IG post 4:5 end to end; approve -> export |
@@ -389,7 +388,7 @@ Blocking items (no build past the week named until closed):
 
 | # | Item | Closes when | By |
 |---|---|---|---|
-| B1 | Adobe terms; clause record in `legal/adobe.md` (Developer Terms 2024, PSLT 2026v2, developer tools addendum 2026v1). **Partly closed:** own machine, own use allowed (4.1(A)); PSLT §9 gap closed on the working reading (owner: the §9 link gives the 2026v1 addendum; its §1.1 excludes PSLT 2026v2 customers, so no extra terms apply). **Open:** distribution (5.1, 5.2, 6.8, 6.10, 6.15, 14.2, 14.3); 6.16 recheck against current terms (option B in force); worldwide PSLT copy (only the Japanese-bilingual copy read); Adobe Fonts, unattended runs, generative ops | `legal/adobe.md` records pass, fail or ask-Adobe per check with source and date; a fail keeps the feature off. Developer Terms 2024: owner states current; verify online at week 1. No Adobe request drafted (user Q11) | Online check and worldwide PSLT: week 1, before accepting in UXP Developer Tool. Distribution: before any `.ccx` leaves this machine. Generative and unattended checks: before those features |
+| B1 | Adobe terms; clause record in `legal/adobe.md` (Developer Terms 2024; Creative API PSLT 2026v2, Japanese-bilingual; worldwide PSLT 2026v1, the owner's only PSLT; addendum 2026v1). **Partly closed:** own machine, own use allowed (Developer Terms 4.1(A)); Creative API PSLT §9 closed on the working reading. **Open:** distribution (Developer Terms 5.1, 5.2, 6.8, 6.10, 6.15, 14.2, 14.3; WW PSLT §4: Adobe add-ins need a separate written agreement; General Terms and Sales Order not supplied); unattended runs (WW §1.2, conflict 8); ML use (Developer Terms 6.16, WW §26, §12.2, §8.2; option B in force); fonts and content (WW §19.1, §34.3); licence limits (WW §2.1, §24); generative ops | `legal/adobe.md` records pass, fail or ask-Adobe per check with source and date; a fail keeps the feature off. Developer Terms 2024: owner states current; verify online at week 1. No Adobe request drafted (user Q11) | Online check: week 1, before accepting in UXP Developer Tool. Distribution: before any `.ccx` leaves this machine (needs General Terms and Sales Order). Unattended runs: before any scheduled or batch Adobe run. Generative and font checks: before those features |
 | B2 | Credential isolation: port discovery (free 127.0.0.1 port written to the pairing file), socket pairing and token, plugin allowlist, per-vendor keys for harnesses and router, Codex judge confined in WSL2 | `test_socket.py`, `test_policy.py`, `test_sandbox.py` pass | Week 3 |
 | B3 | UXP-only regression suite; fixtures hold our protocol messages only; runs are started by hand on the owner's machine (on a Photoshop update, a plugin op change, or a release tag) | Suite fails on a broken op or API change; mock written from our spec; Photoshop first, Premiere when installed | Week 2 |
 | B4 | DIGITAL profile: palette, fonts, voice and mission, banned and held facts, no-commercial-claims rule, layout presets, layer map; wordmark "DIGITAL" for the whole MVP (logo later, not blocking) | Owner signs off `profile.yaml` and `voice.md`; one PSD mapped; authorization record stored | Week 1 |
@@ -405,7 +404,7 @@ local page (open-higgsfield: UI reference only). Never: text-to-image or video o
 
 ## 13. Legal and terms
 
-Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (Developer Terms 4.1(A)). PSLT §9: closed on the working reading (addendum row). Open: distribution, 6.16 recheck against current terms, worldwide PSLT copy, online check of the Developer Terms (owner states the 2024 PDF is current). AI/ML 6.16: option B (conflict 5).
+Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (Developer Terms 4.1(A)); Creative API PSLT §9 closed on the working reading. Open: distribution (General Terms and Sales Order not supplied), unattended runs (conflict 8), ML and font checks, online check of the Developer Terms (owner states the 2024 PDF is current). AI/ML: option B (conflict 5).
 
 | Item | Position |
 |---|---|
@@ -413,8 +412,9 @@ Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (De
 | Adobe AI/ML: Developer Terms 6.16, 6.11 (read) | 6.16: no use of Adobe services, software or output "derived from" them to create, train, test or improve AI, and none for identifying natural persons. 6.11: no re-identification by linking data. Adobe output never goes to eval, 9a measurement or tuning; Adobe-touched assets: human review only, no AI judge, no previews to vendors (conflict 5, option B) |
 | Adobe Developer Terms (local PDF, June 18 2024, 16 pages; owner states current, verify online at week 1; record in `legal/adobe.md`) | Own machine, own use: allowed (4.1(A) development and testing licence). Shipping to others: Adobe approval (5.1; may re-approve after updates; may stop distribution with 10 days' notice), approved channels only (5.2), object code inside approved software only (4.1(A)), no sublicensing (6.8), own EULA and privacy notice (6.15, 6.10); Adobe may terminate any time (14.2); stop distribution at once on termination (14.3). 6.7: API limits apply to end users too. No explicit bot or scraping ban found (6.1, 6.7, 3.1 closest). 23.1 says "Development Software" (likely a typo for "Developer Software"). Until approval: plugin on the owner's machine only (conflict 6) |
 | UXP distribution page | Per research: independent sharing needs no Adobe review. Developer Terms 5.1 requires approval; the scope follows 5.1 |
-| Adobe PSLT 2026v2 (read: Japanese-bilingual copy, no section 10; worldwide copy unread; `legal/adobe.md`) | §9: new developer tools are governed by adobe.com/go/new-developer-tools-terms. Working reading (owner: the A5 files are what the adobe.com links give): that link is the 2026v1 addendum, so §9 is closed (next row). §6.6(A): no Adobe API credentials embedded in the UXP plugin; ours uses none (CI step 9 scans for key patterns). §6.2 and §7 (Firefly API): dormant while Firefly is off. Still checks, not passes: Adobe generative ops, Adobe Fonts in agent-set text, unattended runs |
-| Developer tools addendum 2026v1 (= the PSLT §9 link, working reading) | Contains only section 1; §1.1: section 1 does not apply to customers on PSLT 2026v2 or later. The owner's PSLT is 2026v2 (`pslt-adobecreativeapi-jp-2026v2.pdf`), so no additional new-developer-tools terms apply to the plugin. Caveat: based on the Japanese-bilingual PSLT; the worldwide copy is unread |
+| Adobe PSLT, worldwide (Creative Cloud, Document Cloud, Substance 3D, 2026v1, 11 pp; read; the owner's only PSLT) | §4: no embedding or distribution of Adobe add-ins without a separate written agreement. §19.1, §34.3(B)(1): no standalone content or fonts. §24: one login per user, no shared licence. §2.1: up to two computers, not simultaneously. §26, §12.2: no ML training or testing on output, including generative output. §8.2: no scraping for ML. §1.2: no install or access for operations not initiated by an individual User unless a Sales Order permits (conflict 8). §6: non-genuine software may be cut off. §23: Adobe may change or discontinue features (B3 catches breakage). §34.3(A): Adobe Fonts need a recurring connection |
+| Adobe Creative API PSLT 2026v2 (Japanese-bilingual, no section 10; read; `legal/adobe.md`) | §9: new developer tools are governed by adobe.com/go/new-developer-tools-terms. Working reading (owner: the A5 files are what the adobe.com links give): that link is the 2026v1 addendum, so §9 is closed (next row). §6.6(A): no Adobe API credentials embedded in the UXP plugin; ours uses none (CI step 9 scans for key patterns). §6.2 and §7 (Firefly API): dormant while Firefly is off. Still checks, not passes: Adobe generative ops, Adobe Fonts in agent-set text, unattended runs |
+| Developer tools addendum 2026v1 (= the PSLT §9 link, working reading) | Contains only section 1; §1.1: section 1 does not apply to customers on PSLT 2026v2 or later. The owner's PSLT is 2026v2 (`pslt-adobecreativeapi-jp-2026v2.pdf`), so no additional new-developer-tools terms apply to the plugin |
 | CapCut (capcut.com terms, section 5; user Q3) | Bars automated scripts and reverse engineering. No binding, no draft-file writing, no automation; manual use only |
 | Antigravity (terms clause 6, research summary only; user Q5) | Reportedly bars "using third party software, tools, or services to access the Service"; read verbatim before any use. Excluded from every MVP runtime path, including routing and multi-model agents; owner's own direct tool only (conflict 7) |
 | Cursor | Prices not published; AUP reportedly bars automated access (unverified). Build time only, owner-driven |
@@ -433,12 +433,12 @@ Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (De
 
 ## 14. Open questions (one line each)
 
-1-3. Answered 2026-11-20: DIGITAL authorized by the owner; wordmark for the whole MVP; no club-wide meeting (section 6).
-4. Portfolio profile: which files in PortfolioWebsiteV1 are allowed voice and fact sources?
-5. Can you add the worldwide (non-Japanese) PSLT 2026v2 copy to the A5 folder, to confirm the §9 working reading?
-6. Answered 2026-11-21: option B; Adobe-touched assets go to human review only (conflict 5 closed).
-7. Later-phase Instagram needs media on a public URL: which host (your site, a storage bucket, other), deleted right after publish?
-8. Answered 2026-11-20: Gemini is the runtime fallback judge with a Google key, off until B6 passes (conflict 4 closed).
+Answered 2026-11-20/21: DIGITAL authorization, wordmark, meetings (section 6); conflict 5 option B; Gemini fallback (conflict 4); worldwide PSLT (section 13).
+
+1. Does your Sales Order permit scheduled, unattended or batch runs of Adobe apps (worldwide PSLT §1.2, conflict 8)?
+2. Can you supply Adobe's General Terms and your Sales Order (needed before any plugin distribution, B1)?
+3. Portfolio profile: which files in PortfolioWebsiteV1 are allowed voice and fact sources?
+4. Later-phase Instagram needs media on a public URL: which host (your site, a storage bucket, other), deleted right after publish?
 
 ## Review disputes
 

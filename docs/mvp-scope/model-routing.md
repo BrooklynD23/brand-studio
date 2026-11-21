@@ -10,7 +10,7 @@ eval measures it. Prices: per coordinator research on primary pages (verified) u
    rate meets the check threshold.
 3. A failed check escalates one tier. The step log records task, tier, model, tokens and cost.
 4. Two axes: difficulty (easy, medium, hard) and speed need (interactive: the owner is waiting in Default mode or a
-   takeover; batch: Auto runs, eval, overnight work).
+   takeover; batch: owner-started Auto runs and the eval; no scheduled or unattended runs on Adobe apps, `scope.md` conflict 8).
 5. Routed subtasks are single calls made by the companion's router with the customer's own keys. Role-level work (plans,
    scripts, copy) stays in the Herdr panes on the role's harness.
 6. Measurement uses fixtures and Pillow renders only, never Adobe output (Developer Terms 6.16; `scope.md` conflict 5, closed). n = 50 per cell (guess).
