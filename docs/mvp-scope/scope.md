@@ -1,6 +1,6 @@
 # Brand Studio: MVP scope (companion app)
 
-Date: 2026-11-21, revision 15 (Phase 2 PhotoCraft adapter noted; rev 14: Adobe clause record; rev 13: hint rule; rev 8: team, routing).
+Date: 2026-11-21, revision 17 (private repo exists; rev 16: conflicts 3 and 6 closed; rev 15: PhotoCraft Phase 2; rev 8: team).
 Detail files: `model-routing.md` (prices, per-task routing), `b3-adapter-regression.md` (UXP regression), `legal/adobe.md` (Adobe clause record, B1). Supersedes `../proposals/brand-studio.md`.
 Read: `../brand-studio/` (3/3 tests pass), `../ambitious-plan.md` 3, 4b, 4d, `../diagrams/brand-studio.html`, `../CS4680 Assignment 5 - Your One-Person Company.md`, DIGITAL files cited in section 6.
 Installed (verified 2026-11-20): Deno 2.9.8 (`~/.deno/bin`, not on PATH), Herdr 0.9.5 (Apache 2.0), `.venv` (pillow 13.0.0,
@@ -14,9 +14,9 @@ Marks: (verified) = checked locally or on a primary page; (unverified) = not che
 1. **Photoshop install: resolved.** User confirmed it launches. The two path checks disagreed; the week 1 spike records the path.
 2. **DIGITAL brand: closed.** The owner owns DIGITAL and gave full authorization (2026-11-20); recorded in the profile as
    a consent record (section 6), scope: demo use and the MVP. No org letter needed.
-3. **Posting (later phase) vs no publishing.** The MVP ends at the approved folder. Working reading for the later phase:
-   YouTube Data API and Instagram Graph API, one owner approval click per post (YouTube Developer Policies I.2), under
-   the section 7 conditions, after B5. Instagram needs a public media host (section 8; question 7).
+3. **Posting (later phase): closed, approved** (owner, 2026-11-21). One owner approval click per post, before any upload,
+   via the YouTube Data API and Instagram Graph API under the section 7 conditions, after B5. The MVP still ends at the
+   approved folder. Instagram needs a public media host (section 8; question 7).
 4. **Judge vendor: closed, approved pending B6** (owner, 2026-11-20). Codex is primary (WSL2, bwrap). When Codex is down
    and the customer has a Google key, Gemini is the fallback judge; Gemini runtime use stays off until B6 passes for
    Google. Until then, or without a Google key: Claude, logged as same-vendor.
@@ -25,8 +25,8 @@ Marks: (verified) = checked locally or on a primary page; (unverified) = not che
    output to any vendor, at runtime or in eval. Non-Adobe assets and copy keep the full pipeline (stage 1, stage 2 per
    conflict 4, vendor previews where the consent record allows). **Hint rule** (owner, 2026-11-21): on Adobe-touched assets,
    stage 1 `critic.py` (local code, no AI) may attach its findings to the human review as hints; hints never enter the judge path (no stage 2, no model, no vendor).
-6. **A5 repo vs Developer Terms 5.1: open, owner to confirm.** Working reading: `plugin/` stays out of any public repo; the
-   grader gets a private invite. Supported by 4.1(A) (licence covers own development and testing) and 5.1 (shipping needs Adobe approval); record in `legal/adobe.md`. No repo exists yet; the owner decides it.
+6. **A5 repo vs Developer Terms 5.1: closed, approved** (owner, 2026-11-21). `plugin/` stays out of any public repo; the
+   grader gets a private invite to BrooklynD23/brand-studio. Supported by 4.1(A) and 5.1; record in `legal/adobe.md`. Repo created 2026-11-21 (private), docs snapshot pushed; re-sync `docs/` from `mvp-scope/` on each scope change. Grader invite: pending (owner action).
 7. **Antigravity: settled, verification pending.** Excluded from every MVP runtime path, including model routing and any
    multi-model agent (owner decision). Build-time use only by the owner directly, as their own tool, and only after its
    terms clause 6 is read verbatim (so far a research summary: bars "using third party software, tools, or services to access the Service").
@@ -127,7 +127,7 @@ from our own spec; no pyCapCut code.
 | Local Pillow / ffmpeg / ffprobe | Renders for eval and for stage 2 on non-Adobe assets (conflict 5), clip inventory, CI, Reels fallback | Pillow adapter works; ffmpeg 6.1.1 present |
 | Firefly Services API, Higgsfield | Generation only; customer's own credentials and terms; Brand role only | Off by default in the MVP; PSLT §6.2 and §7 (Firefly API) stay dormant until Firefly is turned on; then B1 generative check + consent (user Q6) |
 | CapCut | **No binding in any plan.** CapCut terms (section 5) bar automated scripts and reverse engineering (user Q3) | Manual only; its exports can be ingested as owned sources |
-| PhotoCraft (storytold/photocraft): **Phase 2 only, not MVP** | For customers without Adobe: Apache-2.0, self-declared clean-room Rust editor. FilmCraft optional for video, same gate. Adobe stays the primary path on the owner's machine | Gate: (a) clean-room process and AGENTS.md read; (b) a CLI or API we can drive (none verified; the README describes a GUI); (c) security review and sandbox run before any of its code executes |
+| PhotoCraft (storytold/photocraft): **Phase 2 only, not MVP** | For customers without Adobe: Apache-2.0, self-declared clean-room Rust editor. FilmCraft (storytold/filmcraft, Apache-2.0) optional for video, same gate. Adobe stays the primary path on the owner's machine | Gate: (a) clean-room process and AGENTS.md read; (b) a CLI or API we can drive (none verified; the README describes a GUI); (c) security review and sandbox run before any of its code executes |
 
 **Later, legal sign-off required (not in MVP):** browser automation of web Adobe apps; General Terms 6.6, 6.7, 6.18 plausibly bar it. Needs Adobe's written authorization (6.6) plus counsel review. Desktop UI automation: out, not designed for.
 
@@ -236,7 +236,7 @@ No PSD templates exist. Week 1 builds `studio profile new`, a wizard that works 
   the plugin to export full-size files from the approved document state into `approved/<pkg>/`, with
   `approval.json` (who, when, sha256 of every file). If the document changed after approval, export stops and asks again.
 - The owner posts by hand. `manifest.json` carries `ai_generated` and provider per asset for platform AI labels.
-- **Later phase posting (conflict 3, working reading):** no posting code before B5. Conditions per coordinator research 2026-11-20:
+- **Later phase posting (conflict 3, approved):** no posting code before B5. Conditions per coordinator research 2026-11-20:
 
 | Platform | Conditions | Unverified |
 |---|---|---|
@@ -323,7 +323,7 @@ Dev install: venv, deps, Deno, Herdr, bwrap, ffmpeg done (header). Remaining ste
 
 Customer install (Windows, week 6, only after B1 5.1 passes): signed `BrandStudio-Setup.exe`; `brand-studio.ccx`; `studio keys set anthropic`; `studio keys set openai`; `studio budget set <usd>`; `studio pair`; `studio profile new`.
 
-CI (GitHub Actions, guess; no repo exists yet: the owner decides it). Any failure blocks merge; no paid calls; mock plugin only:
+CI (GitHub Actions, guess; repo BrooklynD23/brand-studio created 2026-11-21 (private), docs snapshot pushed; re-sync `docs/` from `mvp-scope/` on each scope change). Any failure blocks merge; no paid calls; mock plugin only:
 
 1. `ruff check .`
 2. `pytest -q tests`
@@ -378,7 +378,7 @@ Done 2026-11-20 (header list). User to install: UXP Developer Tool (Adobe login)
 
 | Week | Deliverable |
 |---|---|
-| 1 | Read the PSLT §9 new developer tools terms and confirm the Developer Terms are current, before accepting them in UXP Developer Tool (B1). DIGITAL profile via the wizard (B4: wordmark, fact rules, authorization record). UXP spike in Photoshop: record the path, pair over 127.0.0.1, fill mapped slots, return a preview. `pyproject.toml`, CI 1-2 |
+| 1 | Read the PSLT §9 new developer tools terms and verify online that the 2024 Developer Terms are current (owner states they are), before accepting them in UXP Developer Tool (B1). DIGITAL profile via the wizard (B4: wordmark, fact rules, authorization record). UXP spike in Photoshop: record the path, pair over 127.0.0.1, fill mapped slots, return a preview. `pyproject.toml`, CI 1-2 |
 | 2 | Deno sandbox test + `studio-mcp`; UXP regression suite skeleton for Photoshop (B3) |
 | 3 | Step log with the 17(B) recording scope, Default and Auto modes, revert by replay, takeover, local page, socket and policy tests (B2). CI 3-6 |
 | 4 | `project.json`, `critic.py` stage 1, `roles/*.md` for all 7 roles, Herdr panes; router with `test_router.py`; IG post 4:5 end to end; approve -> export |
@@ -389,7 +389,7 @@ Blocking items (no build past the week named until closed):
 
 | # | Item | Closes when | By |
 |---|---|---|---|
-| B1 | Adobe terms; clause record in `legal/adobe.md` (Developer Terms 2024, PSLT 2026v2, developer tools addendum 2026v1). **Partly closed:** own machine, own use allowed (4.1(A)). **Open:** PSLT §9 new developer tools terms (adobe.com/go/new-developer-tools-terms, NOT READ: the plugin's B1 gap); distribution (5.1, 5.2, 6.8, 6.10, 6.15, 14.2, 14.3); AI/ML 6.16 handled by conflict 5 option B (recheck against current terms); Adobe Fonts, unattended runs, generative ops | `legal/adobe.md` records pass, fail or ask-Adobe per check with source and date; a fail keeps the feature off. Still needed: the §9 terms text; Adobe's current Developer Terms. No Adobe request drafted (user Q11) | §9 terms and current-version check: week 1, before accepting in UXP Developer Tool. Distribution: before any `.ccx` leaves this machine. Generative and unattended checks: before those features |
+| B1 | Adobe terms; clause record in `legal/adobe.md` (Developer Terms 2024, PSLT 2026v2, developer tools addendum 2026v1). **Partly closed:** own machine, own use allowed (4.1(A)). **Open:** PSLT §9 new developer tools terms (adobe.com/go/new-developer-tools-terms, NOT READ: the plugin's B1 gap); distribution (5.1, 5.2, 6.8, 6.10, 6.15, 14.2, 14.3); AI/ML 6.16 handled by conflict 5 option B (recheck against current terms); Adobe Fonts, unattended runs, generative ops | `legal/adobe.md` records pass, fail or ask-Adobe per check with source and date; a fail keeps the feature off. Still needed: the §9 terms text (not in the A5 folder; the two PDFs there, 150,543 and 486,814 bytes, are the documents already read). Developer Terms 2024: owner states current; verify online at week 1. No Adobe request drafted (user Q11) | §9 terms and current-version check: week 1, before accepting in UXP Developer Tool. Distribution: before any `.ccx` leaves this machine. Generative and unattended checks: before those features |
 | B2 | Credential isolation: port discovery (free 127.0.0.1 port written to the pairing file), socket pairing and token, plugin allowlist, per-vendor keys for harnesses and router, Codex judge confined in WSL2 | `test_socket.py`, `test_policy.py`, `test_sandbox.py` pass | Week 3 |
 | B3 | UXP-only regression suite; fixtures hold our protocol messages only; runs are started by hand on the owner's machine (on a Photoshop update, a plugin op change, or a release tag) | Suite fails on a broken op or API change; mock written from our spec; Photoshop first, Premiere when installed | Week 2 |
 | B4 | DIGITAL profile: palette, fonts, voice and mission, banned and held facts, no-commercial-claims rule, layout presets, layer map; wordmark "DIGITAL" for the whole MVP (logo later, not blocking) | Owner signs off `profile.yaml` and `voice.md`; one PSD mapped; authorization record stored | Week 1 |
@@ -405,13 +405,13 @@ local page (open-higgsfield: UI reference only). Never: text-to-image or video o
 
 ## 13. Legal and terms
 
-Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (Developer Terms 4.1(A)). Open: PSLT §9 new developer tools terms (not read), distribution, current-version check of the Developer Terms. AI/ML 6.16: option B (conflict 5).
+Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (Developer Terms 4.1(A)). Open: PSLT §9 new developer tools terms (not read), distribution, online check of the Developer Terms (owner states the 2024 PDF is current). AI/ML 6.16: option B (conflict 5).
 
 | Item | Position |
 |---|---|
 | Adobe General Terms (Oct 3, 2025; per research) | 6.6: UXP is an interface Adobe provides, so the plugin path fits; browser automation of web apps plausibly does not (6.6, 6.18) -> out of MVP. 6.7: plugin never bypasses credit limits or feature gates. 17(B): recording scope limited (5a item 6) |
 | Adobe AI/ML: Developer Terms 6.16, 6.11 (read) | 6.16: no use of Adobe services, software or output "derived from" them to create, train, test or improve AI, and none for identifying natural persons. 6.11: no re-identification by linking data. Adobe output never goes to eval, 9a measurement or tuning; Adobe-touched assets: human review only, no AI judge, no previews to vendors (conflict 5, option B) |
-| Adobe Developer Terms (local PDF, June 18 2024, 16 pages; check Adobe's current version; record in `legal/adobe.md`) | Own machine, own use: allowed (4.1(A) development and testing licence). Shipping to others: Adobe approval (5.1; may re-approve after updates; may stop distribution with 10 days' notice), approved channels only (5.2), object code inside approved software only (4.1(A)), no sublicensing (6.8), own EULA and privacy notice (6.15, 6.10); Adobe may terminate any time (14.2); stop distribution at once on termination (14.3). 6.7: API limits apply to end users too. No explicit bot or scraping ban found (6.1, 6.7, 3.1 closest). 23.1 says "Development Software" (likely a typo for "Developer Software"). Until approval: plugin on the owner's machine only (conflict 6) |
+| Adobe Developer Terms (local PDF, June 18 2024, 16 pages; owner states current, verify online at week 1; record in `legal/adobe.md`) | Own machine, own use: allowed (4.1(A) development and testing licence). Shipping to others: Adobe approval (5.1; may re-approve after updates; may stop distribution with 10 days' notice), approved channels only (5.2), object code inside approved software only (4.1(A)), no sublicensing (6.8), own EULA and privacy notice (6.15, 6.10); Adobe may terminate any time (14.2); stop distribution at once on termination (14.3). 6.7: API limits apply to end users too. No explicit bot or scraping ban found (6.1, 6.7, 3.1 closest). 23.1 says "Development Software" (likely a typo for "Developer Software"). Until approval: plugin on the owner's machine only (conflict 6) |
 | UXP distribution page | Per research: independent sharing needs no Adobe review. Developer Terms 5.1 requires approval; the scope follows 5.1 |
 | Adobe PSLT 2026v2 (read; bilingual jp file, no section 10; `legal/adobe.md`) | §9: new developer tools are governed by adobe.com/go/new-developer-tools-terms: NOT READ, the B1 gap for the plugin. §6.6(A): no Adobe API credentials embedded in the UXP plugin; ours uses none (CI step 9 scans for key patterns). §6.2 and §7 (Firefly API): dormant while Firefly is off. Still checks, not passes: Adobe generative ops, Adobe Fonts in agent-set text, unattended runs |
 | Developer tools addendum 2026v1 | Applies only to Firefly Creative Production customers not on PSLT 2026v2 or later. The owner's PSLT is 2026v2, so its section 1 does not apply (the owner pasted the same text) |
@@ -425,7 +425,7 @@ Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (De
 | Firefly Services API, Higgsfield | Optional, generation only, Brand role, customer's own credentials and terms. Firefly is off by default (PSLT §6.2, §7 dormant). Higgsfield (brief): no resale of API access; agent activity is the account holder's; keys never client-side beyond the customer's machine; no scraping; "no competing product": ask before any multi-customer offer. Wrappers: only `geopopos/higgsfield_ai_mcp` (MIT); never `creativecgl` |
 | DIGITAL brand | Non-commercial student org (terms page section 1). No LICENSE in the repo (verified); the brand belongs to the org. Owner authorization on file (profile consent record, 2026-11-20; scope: demo use and the MVP). Campaign restriction waived for the MVP (owner); copy makes no commercial claims about DIGITAL unless the owner says so |
 | pyCapCut, open-higgsfield | No license: pattern or UI reference only; no code reuse |
-| PhotoCraft (storytold/photocraft), FilmCraft (Phase 2, not MVP) | Apache-2.0 (per the coordinator's check; not re-checked here). Clean-room claim is self-declared, unverified. Section 5 gate applies before any use. Acrobat Pro's counterpart is pdfcraft; no printcraft repo exists |
+| PhotoCraft (storytold/photocraft), FilmCraft (storytold/filmcraft; Phase 2, not MVP) | Apache-2.0 (per the coordinator's checks; FilmCraft verified on GitHub 2026-11-21, pushed that day; not re-checked here). Clean-room claim is self-declared, unverified. Section 5 gate applies before any use. Acrobat Pro's counterpart is pdfcraft; no printcraft repo exists |
 | Vendor input-data terms | Anthropic, OpenAI, Google, xAI, Meta, Adobe, Higgsfield: training, retention, region (unverified; B6). `people=y` material goes only to vendors named in that image's consent record |
 | AI disclosure, ownership | `manifest.json` flags `ai_generated` and provider. Copyright in purely generated assets: (unverified, may be none) |
 | Models, ffmpeg, `mcp`, Herdr, fonts | Wan 2.2 Apache 2.0 (brief), not used. ffmpeg `--enable-gpl` (verified): called as a process, not bundled. `mcp` MIT and Herdr Apache 2.0 (verified). DIGITAL fonts SIL OFL 1.1 (per source file) |
@@ -435,7 +435,7 @@ Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (De
 
 1-3. Answered 2026-11-20: DIGITAL authorized by the owner; wordmark for the whole MVP; no club-wide meeting (section 6).
 4. Portfolio profile: which files in PortfolioWebsiteV1 are allowed voice and fact sources?
-5. Can you paste adobe.com/go/new-developer-tools-terms (PSLT §9, the B1 gap), and is the 2024 Developer Terms PDF current?
+5. Can you paste adobe.com/go/new-developer-tools-terms (PSLT §9, the B1 gap)? It is not among the PDFs in the A5 folder.
 6. Answered 2026-11-21: option B; Adobe-touched assets go to human review only (conflict 5 closed).
 7. Later-phase Instagram needs media on a public URL: which host (your site, a storage bucket, other), deleted right after publish?
 8. Answered 2026-11-20: Gemini is the runtime fallback judge with a Google key, off until B6 passes (conflict 4 closed).
