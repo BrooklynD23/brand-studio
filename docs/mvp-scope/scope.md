@@ -1,6 +1,6 @@
 # Brand Studio: MVP scope (companion app)
 
-Date: 2026-11-21, revision 14 (Adobe clause record linked; PSLT 2026v2 and addendum; rev 13: hint rule; rev 8: team, routing).
+Date: 2026-11-21, revision 15 (Phase 2 PhotoCraft adapter noted; rev 14: Adobe clause record; rev 13: hint rule; rev 8: team, routing).
 Detail files: `model-routing.md` (prices, per-task routing), `b3-adapter-regression.md` (UXP regression), `legal/adobe.md` (Adobe clause record, B1). Supersedes `../proposals/brand-studio.md`.
 Read: `../brand-studio/` (3/3 tests pass), `../ambitious-plan.md` 3, 4b, 4d, `../diagrams/brand-studio.html`, `../CS4680 Assignment 5 - Your One-Person Company.md`, DIGITAL files cited in section 6.
 Installed (verified 2026-11-20): Deno 2.9.8 (`~/.deno/bin`, not on PATH), Herdr 0.9.5 (Apache 2.0), `.venv` (pillow 13.0.0,
@@ -127,6 +127,7 @@ from our own spec; no pyCapCut code.
 | Local Pillow / ffmpeg / ffprobe | Renders for eval and for stage 2 on non-Adobe assets (conflict 5), clip inventory, CI, Reels fallback | Pillow adapter works; ffmpeg 6.1.1 present |
 | Firefly Services API, Higgsfield | Generation only; customer's own credentials and terms; Brand role only | Off by default in the MVP; PSLT §6.2 and §7 (Firefly API) stay dormant until Firefly is turned on; then B1 generative check + consent (user Q6) |
 | CapCut | **No binding in any plan.** CapCut terms (section 5) bar automated scripts and reverse engineering (user Q3) | Manual only; its exports can be ingested as owned sources |
+| PhotoCraft (storytold/photocraft): **Phase 2 only, not MVP** | For customers without Adobe: Apache-2.0, self-declared clean-room Rust editor. FilmCraft optional for video, same gate. Adobe stays the primary path on the owner's machine | Gate: (a) clean-room process and AGENTS.md read; (b) a CLI or API we can drive (none verified; the README describes a GUI); (c) security review and sandbox run before any of its code executes |
 
 **Later, legal sign-off required (not in MVP):** browser automation of web Adobe apps; General Terms 6.6, 6.7, 6.18 plausibly bar it. Needs Adobe's written authorization (6.6) plus counsel review. Desktop UI automation: out, not designed for.
 
@@ -268,8 +269,7 @@ never under `/mnt/c` (drvfs shows files as 777); `studio doctor` fails otherwise
   and Premiere with the plugin; mirrored networking should share 127.0.0.1 (configured, verified; plugin reachability unverified).
 - Product: Windows installer (companion, Deno, plugin `.ccx`, only after B1 5.1 passes); macOS later. Optional cloud
   after MVP: brief intake, profile store, aggregate analytics; public media host for Instagram (later phase, section 8).
-- Budget (user Q2): default $10 per package; `studio budget set <usd>`; enforced by the ledger plus `--max-budget-usd`
-  per call; hitting it pauses the package (approval-required).
+- Budget (user Q2): default $10 per package; `studio budget set <usd>`; enforced by the ledger plus `--max-budget-usd` per call; hitting it pauses the package (approval-required).
 
 Cost per package (guess), before routing. Post package = 5 posts + 5 captions; up to 3 passes; output includes thinking.
 Prices in `model-routing.md` (Opus 5.5 $4/$20, Sonnet 5.5 $2/$10, verified per coordinator research).
@@ -400,7 +400,7 @@ Shippable before B1 passes: the companion with Pillow and ffmpeg adapters only. 
 
 Cut: posting and scheduling (later phase, conflict 3); browser automation and web Adobe apps (later, legal sign-off required); desktop UI
 automation; any CapCut binding; Lightroom; video generation; self-hosted models (Wan 2.2, FLUX, SD 3.5); Grok at runtime until B6; Antigravity
-in any runtime path; hosted LLM proxy and Track C; cloud sync (designed, not built); macOS installer; multi-customer billing; any web UI beyond the
+in any runtime path; hosted LLM proxy and Track C; cloud sync (designed, not built); macOS installer; PhotoCraft and FilmCraft adapters (Phase 2, section 5; not in the MVP milestones); multi-customer billing; any web UI beyond the
 local page (open-higgsfield: UI reference only). Never: text-to-image or video of people; generative edits on people without a consent record.
 
 ## 13. Legal and terms
@@ -425,6 +425,7 @@ Status: B1 partly closed; clause record in `legal/adobe.md`. Own use allowed (De
 | Firefly Services API, Higgsfield | Optional, generation only, Brand role, customer's own credentials and terms. Firefly is off by default (PSLT §6.2, §7 dormant). Higgsfield (brief): no resale of API access; agent activity is the account holder's; keys never client-side beyond the customer's machine; no scraping; "no competing product": ask before any multi-customer offer. Wrappers: only `geopopos/higgsfield_ai_mcp` (MIT); never `creativecgl` |
 | DIGITAL brand | Non-commercial student org (terms page section 1). No LICENSE in the repo (verified); the brand belongs to the org. Owner authorization on file (profile consent record, 2026-11-20; scope: demo use and the MVP). Campaign restriction waived for the MVP (owner); copy makes no commercial claims about DIGITAL unless the owner says so |
 | pyCapCut, open-higgsfield | No license: pattern or UI reference only; no code reuse |
+| PhotoCraft (storytold/photocraft), FilmCraft (Phase 2, not MVP) | Apache-2.0 (per the coordinator's check; not re-checked here). Clean-room claim is self-declared, unverified. Section 5 gate applies before any use. Acrobat Pro's counterpart is pdfcraft; no printcraft repo exists |
 | Vendor input-data terms | Anthropic, OpenAI, Google, xAI, Meta, Adobe, Higgsfield: training, retention, region (unverified; B6). `people=y` material goes only to vendors named in that image's consent record |
 | AI disclosure, ownership | `manifest.json` flags `ai_generated` and provider. Copyright in purely generated assets: (unverified, may be none) |
 | Models, ffmpeg, `mcp`, Herdr, fonts | Wan 2.2 Apache 2.0 (brief), not used. ffmpeg `--enable-gpl` (verified): called as a process, not bundled. `mcp` MIT and Herdr Apache 2.0 (verified). DIGITAL fonts SIL OFL 1.1 (per source file) |
